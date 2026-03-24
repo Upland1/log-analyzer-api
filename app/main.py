@@ -1,7 +1,6 @@
 from fastapi import FastAPI
+from app.routes import logs
 
 app = FastAPI()
 
-@app.get("/")
-def root():
-    return {"Log Analyzer API Running"}
+app.include_router(logs.router)
