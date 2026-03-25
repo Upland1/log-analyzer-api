@@ -3,7 +3,7 @@ import uuid
 
 s3 = boto3.client("s3")
 
-BUCKET_NAME = "bucket-name"
+BUCKET_NAME = "log-analyzer-upland1"
 
 def upload_file(filename: str, content: bytes):
     unique_name = f"{uuid.uuid4()}-{filename}"
