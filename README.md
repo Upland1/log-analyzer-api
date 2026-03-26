@@ -8,20 +8,6 @@ The application is containerized using Docker and deployed on AWS EC2, with AWS 
 
 ---
 
-## Architecture
-
-Client (HTTP / curl)
-↓
-FastAPI Application
-↓
-Docker Container
-↓
-AWS EC2 (Compute)
-↓
-AWS S3 (Storage)
-
----
-
 ## Features
 
 * Upload log files via REST API
@@ -35,7 +21,63 @@ AWS S3 (Storage)
 
 ---
 
-## API Endpoints
+## Architecture & Structure
+
+### Data Flow
+```text
+Client (HTTP / curl)
+↓
+FastAPI Application
+↓
+Docker Container
+↓
+AWS EC2 (Compute)
+↓
+AWS S3 (Storage)
+```
+
+### Project Directory
+```text
+app/
+├── routes/        # API endpoints
+├── services/      # Business logic (log parsing, S3 integration)
+│   ├── parser.py
+│   └── s3.py
+├── main.py        # FastAPI entrypoint
+
+tests/
+└── test_parser.py # Unit tests for log analysis
+
+Dockerfile
+requirements.txt
+README.md
+```
+
+---
+
+## Quick Start (Local Setup)
+
+Clone the repository:
+```bash
+git clone <your-repo-url>
+cd log-analyzer-api
+```
+
+Create virtual environment and install dependencies:
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+Run the API locally:
+```bash
+uvicorn app.main:app --reload
+```
+
+---
+
+## API Usage
 
 ### POST /upload
 
@@ -69,8 +111,22 @@ curl -X POST "http://<your-ip>/upload" \
 
 ---
 
-## Deployment
+## Testing
+Unit tests are implemented using pytest to validate core log parsing logic.
 
+Run tests locally:
+
+```bash
+PYTHONPATH=. pytest -v
+```
+
+Example output:
+`tests/test_parser.py::test_error_count PASSED`
+`tests/test_parser.py::test_top_ips PASSED`
+
+---
+
+## Deployment
 The application is containerized using Docker and deployed to AWS EC2.
 
 Steps:
@@ -83,7 +139,7 @@ Steps:
 
 ---
 
-## Environment Configuration
+## Cloud Deployment (AWS EC2 & S3)
 
 AWS credentials are required for S3 integration.
 
@@ -94,7 +150,6 @@ aws configure
 ```
 
 ---
-
 
 ## Incoming Improvements
 
