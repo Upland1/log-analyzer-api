@@ -41,7 +41,7 @@ AWS S3 (Storage)
 
 Upload and analyze a log file
 
-Replace <your-ip> with your EC2 instance public IP.
+Replace `<your-ip>` with your EC2 instance public IP.
 
 Example:
 
@@ -109,9 +109,9 @@ aws configure
 
 After deployment, access the API using your EC2 public IP:
 
-http://<your-ec2-public-ip>
+`http://<your-ec2-public-ip>`
 
 Interactive docs:
-http://<your-ec2-public-ip>/docs
+`http://<your-ec2-public-ip>/docs`
 
 ---
